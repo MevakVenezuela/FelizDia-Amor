@@ -5,31 +5,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Happy Valentine’s Day 💜</title>
 
-  <!-- Google Fonts -->
+  <!-- Fuentes -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; }
 
     body {
+      margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: radial-gradient(circle at top, #2b0a3d, #120016);
-      color: #f2e9f7;
-      min-height: 100vh;
+      background: linear-gradient(180deg, #f6f0ff, #ffffff);
+      color: #000;
       overflow-x: hidden;
-      padding: 40px 20px;
     }
 
-    /* Corazones de fondo */
+    /* ================= PORTADA ================= */
+    .cover {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(180deg, #efe7ff, #ffffff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      transition: opacity 1.5s ease;
+    }
+
+    .cover-content {
+      text-align: center;
+      animation: pulse 2s infinite;
+    }
+
+    .cover h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+
+    .cover p {
+      font-size: 1.1rem;
+      opacity: 0.8;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    /* ================= CORAZONES FONDO ================= */
     .background-hearts span {
       position: fixed;
-      color: rgba(255, 255, 255, 0.05);
-      font-size: 30px;
-      animation: float 25s linear infinite;
+      font-size: 36px;
+      color: rgba(150, 120, 200, 0.12);
+      animation: float 30s linear infinite;
       z-index: 0;
     }
 
@@ -38,17 +67,21 @@
       100% { transform: translateY(-10vh); }
     }
 
+    /* ================= CONTENIDO ================= */
     .container {
       max-width: 800px;
       margin: auto;
+      padding: 40px 20px;
       position: relative;
       z-index: 2;
-      animation: fadeIn 2s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 2s ease;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .container.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     h1 {
@@ -62,7 +95,7 @@
       text-align: center;
       font-weight: 400;
       margin-bottom: 30px;
-      color: #d8b4ff;
+      color: #444;
     }
 
     .heart {
@@ -73,7 +106,7 @@
 
     p {
       margin-bottom: 18px;
-      line-height: 1.7;
+      line-height: 1.75;
       font-size: 1.05rem;
     }
 
@@ -82,159 +115,119 @@
       font-style: italic;
     }
 
-    .footer {
-      margin-top: 40px;
-      text-align: center;
-      font-size: 0.85rem;
-      opacity: 0.7;
-    }
-
-    /* Botón */
     .btn {
       display: block;
       margin: 40px auto 0;
       padding: 14px 28px;
-      background: linear-gradient(135deg, #8f4cff, #c77dff);
-      color: white;
+      background: linear-gradient(135deg, #9b7cff, #c9b6ff);
+      color: #000;
       text-decoration: none;
       border-radius: 30px;
       font-size: 1.1rem;
       text-align: center;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     }
 
-    .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.85rem;
+      opacity: 0.6;
     }
 
-    /* Corazones al tocar */
+    /* ================= CORAZONES AL TOCAR ================= */
     .tap-heart {
       position: absolute;
-      font-size: 24px;
-      color: #c77dff;
+      font-size: 26px;
+      color: #9b7cff;
       animation: pop 1.5s ease forwards;
       pointer-events: none;
     }
 
     @keyframes pop {
-      0% { opacity: 1; transform: scale(1) translateY(0); }
+      0% { opacity: 1; transform: scale(1); }
       100% { opacity: 0; transform: scale(2) translateY(-80px); }
     }
 
-    iframe {
-      display: none;
-    }
+    iframe { display: none; }
   </style>
 </head>
 <body>
 
-  <!-- Corazones de fondo -->
-  <div class="background-hearts">
-    <span style="left:10%; animation-delay:0s;">💜</span>
-    <span style="left:30%; animation-delay:5s;">💜</span>
-    <span style="left:50%; animation-delay:10s;">💜</span>
-    <span style="left:70%; animation-delay:3s;">💜</span>
-    <span style="left:90%; animation-delay:8s;">💜</span>
+<!-- PORTADA -->
+<div class="cover" id="cover">
+  <div class="cover-content">
+    <h1>💜</h1>
+    <p>Toca para abrir</p>
   </div>
+</div>
 
-  <div class="container">
-    <h1>Happy Valentine’s Day</h1>
-    <h2>Para Irina Patricia Matute Gámez</h2>
-    <div class="heart">💜</div>
+<!-- CORAZONES FONDO -->
+<div class="background-hearts">
+  <span style="left:10%; animation-delay:0s;">💜</span>
+  <span style="left:30%; animation-delay:5s;">💜</span>
+  <span style="left:50%; animation-delay:10s;">💜</span>
+  <span style="left:70%; animation-delay:3s;">💜</span>
+  <span style="left:90%; animation-delay:8s;">💜</span>
+</div>
 
-    <p>
-      Hoy es el día perfecto para recordarte algunas cosas. Y aunque en otras circunstancias todo sería tan diferente, me tomé el tiempo de escribir y codificar estas líneas, y hacerlas duraderas en el tiempo, como cada sentimiento que tengo hacia ti.
-    </p>
+<!-- CONTENIDO -->
+<div class="container" id="content">
+  <h1>Happy Valentine’s Day</h1>
+  <h2>Para Irina Patricia Matute Gámez</h2>
+  <div class="heart">💜</div>
 
-    <p>
-      No sé cuándo lo terminé ni cuánto tiempo me demoré en hacerlo, pero si estás leyendo esto, entonces ya está listo.
-    </p>
+  <!-- AQUÍ PEGA TODO TU TEXTO COMPLETO -->
+  
+  <p class="signature">
+    De tu Lobo (aunque me tienes domesticado)
+  </p>
 
-    <p>
-      Empiezo primero así: feliz día del amor y la amistad, mi vida…
-    </p>
+  <a class="btn" href="https://wa.me/51916540350?text=💜%20Leí%20tu%20mensaje" target="_blank">
+    enviar respuesta 💜
+  </a>
 
-    <p>
-      Hoy, 14 de febrero, aunque en otros tiempos para mí fuese un día simple del calendario, tú activaste en mí ese sentimiento de aprovechar cada fecha para demostrarte lo importante que eres. Y así estemos juntos o no, ya no hablemos como antes y hayan pasado tantas cosas, quiero que sepas que eres una persona muy especial. Y no solo para mí.
-    </p>
-
-    <p>
-      Eres una súper mujer. Tienes un aura especial, un alma hermosa. Eres fuerte, y para mí es un inmenso placer haber coincidido contigo en este tiempo y espacio, en este planeta, entre millones de personas, haber conectado contigo.
-    </p>
-
-    <p>
-      Creo en esa teoría que dice que cuando un alma jura encontrar a la otra, se conectan a través del tiempo y en cualquier vida. Lo digo porque la conexión que tuvimos al principio, para mí, no fue nada común. Y como sabes, soy una persona cerrada para expresar lo que siento, pero tú cambiaste eso en mí… (tema para otro día).
-    </p>
-
-    <p>
-      Pero bueno… quiero que sepas que aún estoy aquí, porque un día me prometí estar para ti. Y no es fallarte a ti lo que me dolería, sino fallarme a mí y a mis ideales si no lo hago.
-    </p>
-
-    <p>
-      Sería literalmente así: por si me necesitas algún día.
-    </p>
-
-    <p>
-      Porque pareces fuerte, pero tienes el corazoncito de pollo. Y si te gritan muy fuerte, lloras. Porque en esos días en los que estás muy sentimental, te ríes o lloras por todo. Por si necesitas conversar de cualquier cosa, o comer helado por un antojo o algún capricho.
-    </p>
-
-    <p>
-      Porque te enojas rápido, pero vuelves a estar como si nada en cuestión de minutos. Porque en tus ataques de ansiedad es difícil entenderte, y yo intento hacerlo. Porque cuando andas depre, yo te comprendo, me pongo en tus zapatos y te doy cariño, así sea desde la distancia, pero siempre busco la manera de hacerte reír.
-    </p>
-
-    <p>
-      Porque aún te amo, te adoro, te idolatro y anhelo cada cosa con la misma intensidad. Los objetivos siguen siendo los mismos. Sigues siendo la mujer de mis ojos, porque aunque no te vea, este corazón sigue latiendo por ti. Aunque tú digas que no, y en el fondo sientas lo contrario, eres la mujer de mi vida.
-    </p>
-
-    <p>
-      Porque te prometí que en las buenas y en las malas siempre estaría contigo, estés o no a mi lado. Siempre voy a estar.
-    </p>
-
-    <p>
-      Y bueno, ese detalle que te llegó es para demostrarte que siempre estás en mi mente y en mi corazón, sin importar la distancia. Y la mujer que amo no puede ser solo espectadora.
-    </p>
-
-    <p>
-      Sin importar las circunstancias, eres y serás parte de mi vida… como ya te expliqué alguna vez qué es amar para mí.
-    </p>
-
-    <p>
-      No olvides que eres fuerte. Que eres importante. Que eres hermosa. Que me encantan esos ojos, tu sonrisa y todo de ti. Que siempre estás en mi mente y en mi corazón. Que te extraño.
-    </p>
-
-    <p>
-      Espero que te guste el detalle que te envié. Muchos besos para ti.
-    </p>
-
-    <p class="signature">
-      De tu Lobo (aunque me tienes domesticado)
-    </p>
-
-    <a class="btn" href="https://wa.me/51916540350?text=💜%20Acabo%20de%20leer%20tu%20mensaje" target="_blank">
-      enviar respuesta 💜
-    </a>
-
-    <div class="footer">
-      Hecho con amor • 14 de febrero
-    </div>
+  <div class="footer">
+    Hecho con amor • 14 de febrero
   </div>
+</div>
 
-  <!-- Música YouTube -->
-  <iframe id="music" src="https://www.youtube.com/embed/7iB20fByOb0?autoplay=1&loop=1&playlist=7iB20fByOb0" allow="autoplay"></iframe>
+<!-- MÚSICA -->
+<iframe id="music"
+  src="https://www.youtube.com/embed/t5b4wHEX37Q?enablejsapi=1&loop=1&playlist=t5b4wHEX37Q"
+  allow="autoplay">
+</iframe>
 
-  <script>
-    document.addEventListener("click", function(e) {
-      const heart = document.createElement("div");
-      heart.className = "tap-heart";
-      heart.textContent = "💜";
-      heart.style.left = e.pageX + "px";
-      heart.style.top = e.pageY + "px";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 1500);
-    });
-  </script>
+<script>
+  let started = false;
+
+  document.getElementById("cover").addEventListener("click", function() {
+    this.style.opacity = "0";
+    setTimeout(() => this.style.display = "none", 1500);
+
+    document.getElementById("content").classList.add("show");
+
+    const iframe = document.getElementById("music");
+    iframe.contentWindow.postMessage(
+      '{"event":"command","func":"playVideo","args":""}',
+      '*'
+    );
+
+    started = true;
+  });
+
+  document.addEventListener("click", function(e) {
+    if (!started) return;
+
+    const heart = document.createElement("div");
+    heart.className = "tap-heart";
+    heart.textContent = "💜";
+    heart.style.left = e.pageX + "px";
+    heart.style.top = e.pageY + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 1500);
+  });
+</script>
 
 </body>
 </html>
